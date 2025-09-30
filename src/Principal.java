@@ -79,7 +79,7 @@ public class Principal {
         Propriedade propriedade = new Propriedade(titulo, descricao, localizacao, capacidade, preco, proprietario); 
         propriedades.add(propriedade);
         proprietario.adicionarPropriedades(propriedade);
-        System.out.println("Propriedade cadastrada com sucesso!");
+        System.out.println("Propriedade cadastrada com sucesso");
     }
 
     private static void listarPropriedades() {
