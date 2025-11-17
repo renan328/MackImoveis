@@ -1,24 +1,42 @@
 package proj.rest.mackimoveis.models;
-public class Reserva {
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Reserva {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Propriedade propriedade;
     private Usuario usuario;
-    // private String checkIn;
-    // private String checkOut;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
     private int dias;
     private double custoTotal;
 
-    public Reserva(Propriedade propriedade, Usuario usuario, String checkIn, String checkOut, int dias) {
+    public Reserva(){}
+
+    public Reserva(Propriedade propriedade, Usuario usuario, String checkIn, String checkOut) {
         this.propriedade = propriedade;
         this.usuario = usuario;
-        // this.checkIn = checkIn;
-        // this.checkOut = checkOut;
-        this.dias = dias;
+        // localDate.parse serve para converter (nesse caso string para data)
+        this.checkIn = LocalDate.parse(checkIn);
+        this.checkOut = LocalDate.parse(checkOut);
+        this.dias = calcularDias();
         this.custoTotal = calcularCustoTotal();
     }
 
+    private int calcularDias(){
+        // força o resultado ser um int 
+        return (int) ChronoUnit.DAYS.between(checkIn, checkOut);
+    }
+
     private double calcularCustoTotal() {
-        // dias = checkIn - checkOut;
         return dias * propriedade.getPrecoPorNoite();
     }
 
@@ -26,29 +44,60 @@ public class Reserva {
         System.out.println("=== Reserva ===");
         System.out.println("Usuário: " + usuario.getNome());
         System.out.println("Propriedade: " + propriedade.getTitulo());
+        System.out.println("Check-in: " + checkIn);
+        System.out.print("Check-out: " + checkOut);
         System.out.println("Dias de estadia: " + dias);
         System.out.println("Custo total: R$ " + custoTotal);
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Propriedade getPropriedade() {
         return propriedade;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public LocalDate getCheckIn() {
+        return checkIn;
+    }
+
+    public LocalDate getCheckOut() {
+        return checkOut;
+    }
+
+    public int getDias() {
+        return dias;
+    }
+
+    public double getCustoTotal() {
+        return custoTotal;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setPropriedade(Propriedade propriedade) {
         this.propriedade = propriedade;
         this.custoTotal = calcularCustoTotal();
-    }
 
-    public Usuario getUsuario() {
-        return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public int getDias() {
-        return dias;
+    public void setCheckIn(LocalDate checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public void setCheckOut(LocalDate checkOut) {
+        this.checkOut = checkOut;
     }
 
     public void setDias(int dias) {
@@ -56,7 +105,7 @@ public class Reserva {
         this.custoTotal = calcularCustoTotal();
     }
 
-    public double getCustoTotal() {
-        return custoTotal;
+    public void setCustoTotal(double custoTotal) {
+        this.custoTotal = custoTotal;
     }
 }
