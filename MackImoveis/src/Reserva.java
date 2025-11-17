@@ -1,24 +1,34 @@
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
+@Entity
 public class Reserva {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.INDENTITY)
+    private Long id;
     private Propriedade propriedade;
     private Usuario usuario;
-    // private String checkIn;
-    // private String checkOut;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
     private int dias;
     private double custoTotal;
 
     public Reserva(Propriedade propriedade, Usuario usuario, String checkIn, String checkOut, int dias) {
         this.propriedade = propriedade;
         this.usuario = usuario;
-        // this.checkIn = checkIn;
-        // this.checkOut = checkOut;
-        this.dias = dias;
+        // localDate.parse serve para converter (nesse caso string para data)
+        this.checkIn = LocalDate.parse(checkIn);
+        this.checkOut = LocalDate.parse(checkOut);
+        this.dias = calcularDias();
         this.custoTotal = calcularCustoTotal();
     }
 
+    private int calcularDias(){
+        // força o resultado ser um int 
+        return (int) ChronoUnit.DAYS.between(checkIn, checkOut);
+    }
+
     private double calcularCustoTotal() {
-        // dias = checkIn - checkOut;
         return dias * propriedade.getPrecoPorNoite();
     }
 
@@ -26,6 +36,8 @@ public class Reserva {
         System.out.println("=== Reserva ===");
         System.out.println("Usuário: " + usuario.getNome());
         System.out.println("Propriedade: " + propriedade.getTitulo());
+        System.out.println("Check-in: " + checkIn);
+        System.out.print("Check-out: " + checkOut);
         System.out.println("Dias de estadia: " + dias);
         System.out.println("Custo total: R$ " + custoTotal);
     }
