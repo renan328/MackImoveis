@@ -1,0 +1,115 @@
+/* cor base E41749 */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    font-family: prata, serif;
+    color: #E41749;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.auth-buttons button {
+    margin-left: 10px;
+    padding: 8px 12px;
+    background-color: white;
+    color: #E41749;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.hotel-detalhes {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hotel-img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.info {
+    flex: 1;
+    padding: 20px;
+    min-width: 300px;
+}
+
+.info h2 {
+    margin-top: 0;
+}
+
+.preco {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.datas {
+    display: flex;
+    gap: 40px;
+    margin: 15px 0;
+}
+
+.reservar {
+    background-color: #E41749;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.descricao {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  gap: 10px;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 300px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.search-bar button {
+  padding: 10px 16px;
+  background-color: #E41749;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
