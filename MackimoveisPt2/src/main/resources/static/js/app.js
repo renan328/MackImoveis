@@ -19,28 +19,70 @@ function logout() { sessionStorage.removeItem('user'); location.hash = '#/login'
 
 // Home
 async function renderHome() {
-    const container = document.querySelector('#properties-list');
-    let list = [];
 
-    try {
-        list = await API.get('/api/propriedades/disponiveis');
-    } catch { list = []; }
 
-    if (list == []) {
-        container.innerHTML = list.map(p => `
-        <div class='card'>
-            <img src='${p.imagemUrl || "/assets/img/default.jpg"}'>
-            <div class='card-body'>
-                <h3>${p.titulo}</h3>
-                <p>${p.localizacao}</p>
-                <p>R$ ${p.precoPorNoite}</p>
-                <a class='btn' href='#/propriedade?id=${p.id}'>Ver mais</a>
-            </div>
-        </div>
-      `).join('');
-    } else{
-        container.innerHTML = "<h4>Sem propriedades</h4>"
-    }
+    const hotels = [
+        {
+            nome: "Hotel Copacabana Palace",
+            local: "Rio de Janeiro - Copacabana",
+            tipo: "Hotel",
+            capacidade: "Até 3 pessoas",
+            preco: "R$ 250,00",
+            imagem: "hotel1.jpg"
+        },
+        {
+            nome: "Hotel Copacabana Palace",
+            local: "Rio de Janeiro - Copacabana",
+            tipo: "Hotel",
+            capacidade: "Até 3 pessoas",
+            preco: "R$ 250,00",
+            imagem: "hotel2.jpg"
+        },
+        // Adicione mais objetos conforme necessário
+    ];
+
+        const container = document.getElementById("properties-list") || document.getElementById("hotel-list");
+        if (!container) return;
+
+    // Renderiza cards estáticos de exemplo — substitua pela API quando pronto
+    hotels.forEach(hotel => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <img src="/assets/imgs/${hotel.imagem}" alt="${hotel.nome}">
+            <div class="card-body">
+                <h3>${hotel.nome}</h3>
+                <p>${hotel.local}</p>
+                <p>Tipo: ${hotel.tipo}</p>
+                <p>Capacidade: ${hotel.capacidade}</p>
+                <p>${hotel.preco} por dia</p>
+                <a class="btn" href="#">Ver mais</a>
+            </div>`;
+            container.appendChild(card);
+    });
+
+    // const container = document.querySelector('#properties-list');
+    // let list = [];
+
+    // try {
+    //     list = await API.get('/api/propriedades/disponiveis');
+    // } catch { list = []; }
+
+    // if (list == []) {
+    //     container.innerHTML = list.map(p => `
+    //     <div class='card'>
+    //         <img src='${p.imagemUrl || "/assets/img/default.jpg"}'>
+    //         <div class='card-body'>
+    //             <h3>${p.titulo}</h3>
+    //             <p>${p.localizacao}</p>
+    //             <p>R$ ${p.precoPorNoite}</p>
+    //             <a class='btn' href='#/propriedade?id=${p.id}'>Ver mais</a>
+    //         </div>
+    //     </div>
+    //   `).join('');
+    // } else{
+    //     container.innerHTML = "<h4>Sem propriedades</h4>"
+    // }
 }
 
 // Login
@@ -154,29 +196,29 @@ async function loadDashboardLocatario() {
 }
 
 // Cad propriedade
-async function handleCadastroPropriedade(e){
-  e.preventDefault();
-  const user = getUser();
-  if(!user || user.tipo !== 'PROPRIETARIO'){ 
-    document.querySelector('#prop-error').innerText = 'Apenas proprietários podem cadastrar propriedades.';
-    return;
-  }
+async function handleCadastroPropriedade(e) {
+    e.preventDefault();
+    const user = getUser();
+    if (!user || user.tipo !== 'PROPRIETARIO') {
+        document.querySelector('#prop-error').innerText = 'Apenas proprietários podem cadastrar propriedades.';
+        return;
+    }
 
-  const body = {
-    titulo: document.querySelector('#prop-titulo').value,
-    descricao: document.querySelector('#prop-desc').value,
-    localizacao: document.querySelector('#prop-loc').value,
-    capacidade: document.querySelector('#prop-cap').value,
-    precoPorNoite: document.querySelector('#prop-preco').value,
-    proprietarioId: user.id
-  };
+    const body = {
+        titulo: document.querySelector('#prop-titulo').value,
+        descricao: document.querySelector('#prop-desc').value,
+        localizacao: document.querySelector('#prop-loc').value,
+        capacidade: document.querySelector('#prop-cap').value,
+        precoPorNoite: document.querySelector('#prop-preco').value,
+        proprietarioId: user.id
+    };
 
-  const res = await API.post('/api/propriedades', body);
+    const res = await API.post('/api/propriedades', body);
 
-  if(!res.ok){
-    document.querySelector('#prop-error').innerText = 'Erro ao cadastrar propriedade';
-    return;
-  }
+    if (!res.ok) {
+        document.querySelector('#prop-error').innerText = 'Erro ao cadastrar propriedade';
+        return;
+    }
 
-  document.querySelector('#prop-success').innerText = 'Propriedade cadastrada com sucesso!';
+    document.querySelector('#prop-success').innerText = 'Propriedade cadastrada com sucesso!';
 }

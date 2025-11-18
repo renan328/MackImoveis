@@ -1,12 +1,12 @@
 const routes = {
-  '': '/pages/home.html',
-  '#/': '/pages/home.html',
-  '#/login': '/pages/login.html',
-  '#/cadastro': '/pages/cadastro.html',
-  '#/dashboard-proprietario': '/pages/dashboard-proprietario.html',
-  '#/dashboard-locatario': '/pages/dashboard-locatario.html',
-  '#/propriedade': '/pages/propriedade-detalhe.html',
-  '#/reserva': '/pages/reserva.html'
+  '': '/Pages/Home.html',
+  '#/': '/Pages/Home.html',
+  '#/login': '/Pages/Login.html',
+  '#/cadastro': '/Pages/Cadastro.html',
+  '#/dashboard-proprietario': '/Pages/CadPropriedade.html',
+  '#/dashboard-locatario': '/Pages/Home.html',
+  '#/propriedade': '/Pages/propriedade-detalhe.html',
+  '#/reserva': '/Pages/Reserva.html'
 };
 
 async function router() {
