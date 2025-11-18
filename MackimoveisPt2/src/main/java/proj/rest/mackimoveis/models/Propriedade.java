@@ -2,15 +2,14 @@ package proj.rest.mackimoveis.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name="propriedade")
 public class Propriedade {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean disponivel;
     private String titulo;
@@ -18,15 +17,15 @@ public class Propriedade {
     private String localizacao;
     private int capacidade;
     private double precoPorNoite;
+
     @ManyToOne
-    @JoinColumn(name = "proprietario_id")
-    private Usuario proprietario;
+    private Proprietario proprietario;
 
     public Propriedade() {
         this.disponivel = true;
     }
 
-    public Propriedade(String titulo, String descricao, String localizacao, int capacidade, double precoPorNoite, Usuario proprietario) {
+    public Propriedade(String titulo, String descricao, String localizacao, int capacidade, double precoPorNoite, Proprietario proprietario) {
         this.disponivel = true;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -34,16 +33,6 @@ public class Propriedade {
         this.capacidade = capacidade;
         this.precoPorNoite = precoPorNoite;
         this.proprietario = proprietario;
-    }
-
-    public void imprimirDados() {
-        System.out.println("Título: " + titulo);
-        System.out.println("Descrição: " + descricao);
-        System.out.println("Localização: " + localizacao);
-        System.out.println("Capacidade: " + capacidade);
-        System.out.println("Preço por noite: R$" + precoPorNoite);
-        System.out.println("Prorietario: " + proprietario.getNome());
-        System.out.println("Disponível: " + (disponivel ? "Sim" : "Não"));
     }
 
     public Long getId() {
@@ -102,7 +91,7 @@ public class Propriedade {
         this.precoPorNoite = precoPorNoite;
     }
 
-    public void setProprietario(Usuario proprietario) {
+    public void setProprietario(Proprietario proprietario) {
         this.proprietario = proprietario;
     }
 

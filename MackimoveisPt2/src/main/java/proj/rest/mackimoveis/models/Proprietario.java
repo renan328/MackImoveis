@@ -1,20 +1,21 @@
 package proj.rest.mackimoveis.models;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "proprietarios")
 public class Proprietario extends Usuario {
 
-    @OneToMany(mappedBy = "proprietario")
-    private List<Propriedade> propriedades = new ArrayList<>();
+    @OneToMany(mappedBy = "proprietario", cascade = CascadeType.ALL)
+    private List<Propriedade> propriedades;
 
     public Proprietario() {}
 
-    public Proprietario(String nome, String email, String senha) {
-        super(nome, email, senha);
+    public Proprietario(Long id, String nome, String email, String senha) {
+        super();
+        this.setNome(nome);
+        this.setEmail(email);
+        this.setSenha(senha);
     }
 
     public List<Propriedade> getPropriedades() {

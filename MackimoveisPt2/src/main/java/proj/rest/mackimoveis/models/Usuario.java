@@ -1,9 +1,7 @@
 package proj.rest.mackimoveis.models;
 import jakarta.persistence.*;
 
-
 @Entity
-@Table(name = "usuarios")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario {
 
@@ -12,6 +10,7 @@ public abstract class Usuario {
     private Long id;
 
     private String nome;
+    @Column(unique=true)
     private String email;
     private String senha;
 

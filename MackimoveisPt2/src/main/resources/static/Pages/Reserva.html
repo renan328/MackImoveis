@@ -1,0 +1,20 @@
+<section class="form">
+    <h2>Reserva</h2>
+
+
+    <div id="res-error" style="color:red"></div>
+    <div id="res-success" style="color:green"></div>
+
+
+    <form onsubmit="handleReserve(event)">
+        <label>Check-in</label>
+        <input id="checkin" type="date" required>
+
+
+        <label>Check-out</label>
+        <input id="checkout" type="date" required>
+
+
+        <button class="btn" type="submit">Confirmar Reserva</button>
+    </form>
+</section>

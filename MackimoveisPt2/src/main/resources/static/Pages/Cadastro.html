@@ -1,0 +1,18 @@
+<section class="form">
+    <h2>Cadastro</h2>
+    <div id="cad-error" style="color:red"></div>
+    <form onsubmit="handleCadastro(event)">
+        <label>Nome</label>
+        <input id="cad-nome" required>
+        <label>Email</label>
+        <input id="cad-email" type="email" required>
+        <label>Senha</label>
+        <input id="cad-senha" type="password" required>
+        <label>Tipo</label>
+        <div>
+            <label><input type="radio" name="tipo" value="INQUILINO" checked> Inquilino</label>
+            <label><input type="radio" name="tipo" value="PROPRIETARIO"> Proprietário</label>
+        </div>
+        <button class="btn" type="submit">Cadastrar</button>
+    </form>
+</section>

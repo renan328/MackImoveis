@@ -8,7 +8,7 @@ import proj.rest.mackimoveis.models.Reserva;
 import proj.rest.mackimoveis.repositories.ReservaRepository;
 
 @RestController
-@RequestMapping("/reserva")
+@RequestMapping("/api/reserva")
 
 public class ReservaController {
     private final ReservaRepository reservaRepository;
@@ -22,15 +22,23 @@ public class ReservaController {
         return reservaRepository.findAll();
     }
 
-    @PostMapping
-    public Reserva createReserva(@RequestBody Reserva r) throws Exception {
-        Reserva criarReserva = reservaRepository.save(r);
-        return criarReserva;
-    }
-
+    
     @GetMapping("/{id}")
     Optional<Reserva> getReserva(@PathVariable long id) {
         return reservaRepository.findById(id);
+    }
+
+    
+    @GetMapping("/usuario/{id}")
+    Optional<Reserva> getReservaUsuario(@PathVariable long id) {
+        return reservaRepository.findByUsuarioId(id);
+    }
+
+    @PostMapping
+    public Reserva createReserva(@RequestBody Reserva r) throws Exception {
+        Reserva reserva = reservaRepository.save(r);
+        reserva.getPropriedade().setDisponivel(false);
+        return reserva;
     }
 
     // esse aqui tem que ser dois? Um para o usuario e um para o locator?

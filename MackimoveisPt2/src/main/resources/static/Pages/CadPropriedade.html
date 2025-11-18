@@ -1,0 +1,32 @@
+<section class="form">
+    <h2>Cadastrar Propriedade</h2>
+    <div id="prop-error" style="color:red"></div>
+    <div id="prop-success" style="color:green"></div>
+    <form onsubmit="handleCadastroPropriedade(event)">
+        <label>Título</label>
+        <input id="prop-titulo" required>
+
+
+        <label>Descrição</label>
+        <input id="prop-desc" required>
+
+
+        <label>Localização</label>
+        <input id="prop-loc" required>
+
+
+        <label>Capacidade</label>
+        <input id="prop-cap" type="number" required>
+
+
+        <label>Preço por noite</label>
+        <input id="prop-preco" type="number" required>
+
+
+        <button class="btn" type="submit">Cadastrar</button>
+    </form>
+</section>
+
+<script>
+    handleCadastroPropriedade();
+</script>
